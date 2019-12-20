@@ -1,20 +1,21 @@
 import pandas as pd
-%matplotlib inline
-import matplotlib.pyplot as plt
 
 dados = pd.read_excel('C:/Users/flora/Downloads/testee.xlsx')
 
-x = dados['Preço de ajuste Atual']
-y = dados['Preço de ajuste anterior']
+variacao = dados.loc[dados['Variação'] >= 0]
+variacao.head(500)
 
-plt.plot(x, y)
+x = variacao['Preço de ajuste anterior']
+y = variacao['Preço de ajuste Atual']
 
-plt.title('Ajuste Atual X Ajuste Anterior')
-plt.grid(True)
+%matplotlib inline
+import matplotlib.pyplot as plt
 
-plt.xlabel('Atual')
-plt.ylabel('Anterior')
-plt.grid(True)
+fig, ax = plt.subplots()
+ax.plot(x, y)
 
-plt.tight_layout()
+ax.set(xlabel='Preço ajuste anterior', ylabel='Preço ajuste atual)',
+       title='Variação de ajuste para as variações positivas (PREGÃO)')
+       
+ax.grid()
 plt.show()
